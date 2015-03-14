@@ -1,0 +1,22 @@
+{
+  "name": "cdn",
+  "version": "1.0.0",
+  "description": "Simle image cdn",
+  "main": "app.js",
+  "dependencies": {
+    "co-child-process": "0.0.3",
+    "koa": "^0.18.1",
+    "koa-logger": "^1.2.2",
+    "koa-static": "^1.4.9",
+    "mz": "^1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cdn"
+  ],
+  "author": "blia",
+  "license": "ISC"
+}
