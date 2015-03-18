@@ -4,11 +4,13 @@
   "description": "Simle image cdn",
   "main": "app.js",
   "dependencies": {
+    "co-busboy": "^1.3.0",
     "co-child-process": "0.0.3",
     "koa": "^0.18.1",
     "koa-logger": "^1.2.2",
     "koa-static": "^1.4.9",
-    "mz": "^1.3.0"
+    "mz": "^1.3.0",
+    "node-uuid": "^1.4.3"
   },
   "devDependencies": {},
   "scripts": {

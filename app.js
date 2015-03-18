@@ -5,6 +5,14 @@ var koa = require('koa')
   , logger = require('koa-logger')
   , serve = require('koa-static')
 
+var path = require('path');
+var fs = require('mz/fs');
+var spawn = require('co-child-process');
+var parse = require('co-busboy');
+var os = require('os')
+var uuid = require('node-uuid');
+
+
 var app = koa();
 
 app.use(logger());
@@ -13,13 +21,5 @@ app.use(logger());
 app.use(serve('cache'));
 
 app.use(cdn(contentPath));
-
-app.use(function *response (next){
-  this.body = 'Hello World';
-});
-
-// app.on('error', function(err, ctx){
-//   console.log('server error', err.toString());
-// });
 
 app.listen(4202)
