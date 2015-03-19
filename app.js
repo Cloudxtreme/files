@@ -14,12 +14,17 @@ var uuid = require('node-uuid');
 
 
 var app = koa();
-
+var cdn = cdn(contentPath);
 app.use(logger());
 
 // Note! Nginx try_files up to 3x faster. Tested
 app.use(serve('cache'));
 
-app.use(cdn(contentPath));
+app.use(cdn.cors)
+
+app.use(cdn.uploader)
+
+app.use(cdn.fileInfo)
+app.use(cdn.imageGenerator)
 
 app.listen(4202)

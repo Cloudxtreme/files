@@ -18,7 +18,7 @@ var uuid = require('node-uuid');
  * @api public
  */
 
-module.exports = function (contentDir, options){
+module.exports = function cdn(contentDir, options){
   var icon
     , cache = path.resolve('./cache')
     , modes = {
@@ -88,15 +88,17 @@ module.exports = function (contentDir, options){
     ? 86400000
     : Math.min(Math.max(0, options.maxAge), 31556926000);
 
-  return function *cdn(next){
+  this.cors = function *cors(next) {
+    if ('GET' !== this.method && 'HEAD' !== this.method && 'POST' !== this.method) {
+      this.status = 'OPTIONS' == this.method ? 200 : 405;
+      this.set('Allow', 'GET, HEAD, OPTIONS, POST, DELETE');
+      this.set('Access-Control-Allow-Origin', '*');
+      return;
+    }
+    yield* next;
+  }
 
-    // if ('GET' !== this.method && 'HEAD' !== this.method) {
-    //   this.status = 'OPTIONS' == this.method ? 200 : 405;
-    //   this.set('Allow', 'GET, HEAD, OPTIONS, POST, DELETE');
-    //   return;
-    // }
-
-    // Upload
+  this.uploader = function *uploader(next) {
     if(this.method === 'POST') {
       var parts = parse(this);
       var part;
@@ -105,24 +107,50 @@ module.exports = function (contentDir, options){
 
       while (part = yield parts) {
         var storedName = uuid.v4()
-        var stream = fs.createWriteStream(path.join(cache, storedName));
+        var stream = fs.createWriteStream(path.join(contentDir, storedName));
+
         part.pipe(stream);
+        var dataLength = 0
+        var requestLength = this.request.length
+        part.on('data', function (chunk) {
+          dataLength += chunk.length
+          console.log('uploading', Math.round(dataLength/requestLength*100));
+        })
         console.log('uploading %s -> %s', part.filename, stream.path);
-        file = {name: part.filename, uuid: storedName, fileName: path.join(cache, storedName)}
-        if (/image\/.*/.test(part.mimeType)) {
+        file = {
+          name: part.filename,
+          uuid: storedName,
+          fileName: path.join(contentDir, storedName),
+          isImage: /image\/.*/.test(part.mimeType)
+        }
+        uploaded.push(file)
+      }
+      this.uploaded = uploaded
+    }
+    yield* next;
+  }
+
+  this.fileInfo = function *fileInfo(next) {
+    if (this.uploaded && this.uploaded.length) {
+      for (var i = 0; i < this.uploaded.length; i++) {
+        var file = this.uploaded[i]
+        if (file.isImage) {
           var info = yield spawn('identify', [file.fileName])
           info = info.split(' ')
           file.image = true
           file.format = info[1]
           file.width = info[2].split('x')[0]
           file.height = info[2].split('x')[1]
-          uploaded.push(file)
+          delete file.fileName
         }
       }
-
-      this.body = uploaded
-      yield next
+      this.body = this.uploaded;
+      return;
     }
+    yield* next;
+  }
+
+  this.imageGenerator = function *imageGenerator(next){
     // generate image
     if(this.method === 'GET'){
       var mode = path.dirname(this.path)
@@ -151,6 +179,9 @@ module.exports = function (contentDir, options){
       this.set('Cache-Control', 'public, max-age=' + (maxAge / 1000 | 0));
       this.type = 'image/x-icon';
       this.body = image;
+      return;
     }
-  };
+    yield* next;
+  }
+  return this
 };
