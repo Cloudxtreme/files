@@ -5,6 +5,7 @@ server {
   error_log /Users/blia/Projects/cdn/log debug;
   try_files /cache$uri @app;
   location @app {
+    client_max_body_size 0;
     proxy_pass http://127.0.0.1:4202;
   }
 
