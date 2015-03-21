@@ -30,14 +30,49 @@ module.exports = function cdn(contentDir, options){
         '-extent', '558x558',
         '-interlace', 'Plane'
       ],
+      '/site/item/first-image-x2': [
+        '-strip',
+        '-thumbnail', '766x1116',
+        '-background', 'transparent',
+        '-gravity', 'center',
+        '-extent', '1116x1116',
+        '-interlace', 'Plane'
+      ],
       '/site/item/image': [
         '-strip',
-        '-thumbnail', '358x558',
+        '-thumbnail', '558x558',
         '-background', 'transparent',
         '-gravity', 'center',
         '-extent', '558x558',
         '-interlace', 'Plane'
       ],
+      '/site/item/image-2x': [
+        '-strip',
+        '-thumbnail', '1116x1116',
+        '-background', 'transparent',
+        '-gravity', 'center',
+        '-extent', '1116x1116',
+        '-interlace', 'Plane'
+      ],
+      '/site/item/ico-60': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '60x60',
+        '-gravity', 'center',
+        '-extent', '60x60',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/site/item/ico-60-2x': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '120x120',
+        '-gravity', 'center',
+        '-extent', '120x120',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+
       '/admin/item/thumb': [
         '-strip',
         '-flatten',
