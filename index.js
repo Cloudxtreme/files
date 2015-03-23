@@ -72,7 +72,20 @@ module.exports = function cdn(contentDir, options){
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
-
+      '/site/item/preview': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '220x',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/site/item/preview-2x': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '440x',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
       '/admin/item/thumb': [
         '-strip',
         '-flatten',
