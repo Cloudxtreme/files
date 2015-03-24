@@ -30,7 +30,7 @@ module.exports = function cdn(contentDir, options){
         '-extent', '558x558',
         '-interlace', 'Plane'
       ],
-      '/site/item/first-image-x2': [
+      '/site/item/first-image-2x': [
         '-strip',
         '-thumbnail', '766x1116',
         '-background', 'transparent',
@@ -86,6 +86,37 @@ module.exports = function cdn(contentDir, options){
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
+      '/ipad/menu/ico-110': [
+        '-strip',
+        '-thumbnail', '110x110',
+        '-background', 'transparent',
+        '-gravity', 'center',
+        '-extent', '110x110',
+        '-interlace', 'Plane'
+      ],
+      '/ipad/menu/ico-220': [
+        '-strip',
+        '-thumbnail', '220x220',
+        '-background', 'transparent',
+        '-gravity', 'center',
+        '-extent', '220x220',
+        '-interlace', 'Plane'
+      ],
+      '/site/ipad/preview': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '226x',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/site/ipad/preview-2x': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '452x',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      // admin
       '/admin/item/thumb': [
         '-strip',
         '-flatten',
