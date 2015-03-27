@@ -102,19 +102,35 @@ module.exports = function cdn(contentDir, options){
         '-extent', '220x220',
         '-interlace', 'Plane'
       ],
-      '/site/ipad/preview': [
+      '/ipad/item/preview': [
         '-strip',
         '-flatten',
         '-thumbnail', '226x',
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
-      '/site/ipad/preview-2x': [
+      '/ipad/item/preview-2x': [
         '-strip',
         '-flatten',
         '-thumbnail', '452x',
         '-interlace', 'Plane',
         '-quality', '80%'
+      ],
+      '/ipad/item/order': [
+        '-strip',
+        '-thumbnail', '180x200',
+        '-background', 'transparent',
+        '-gravity', 'center',
+        '-extent', '180x200',
+        '-interlace', 'Plane'
+      ],
+      '/ipad/item/preview-2x': [
+        '-strip',
+        '-thumbnail', '360x400',
+        '-background', 'transparent',
+        '-gravity', 'center',
+        '-extent', '360x400',
+        '-interlace', 'Plane'
       ],
       // admin
       '/admin/item/thumb': [
