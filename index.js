@@ -124,13 +124,36 @@ module.exports = function cdn(contentDir, options){
         '-extent', '180x200',
         '-interlace', 'Plane'
       ],
-      '/ipad/item/preview-2x': [
+      '/iphone/menu/thumb': [
         '-strip',
-        '-thumbnail', '360x400',
+        '-thumbnail', '196x194',
         '-background', 'transparent',
         '-gravity', 'center',
-        '-extent', '360x400',
-        '-interlace', 'Plane'
+        '-extent', '196x194'
+      ],
+      '/iphone/item/cover': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '300x300',
+        '-gravity', 'center',
+        '-extent', '300x300',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/iphone/item/preview': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '640x640',
+        '-gravity', 'center',
+        '-extent', '640x640',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/iphone/item/white': [
+        '-strip',
+        '-flatten',
+        '-interlace', 'Plane',
+        '-quality', '80%'
       ],
       // admin
       '/admin/item/thumb': [
