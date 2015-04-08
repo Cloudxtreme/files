@@ -197,6 +197,12 @@ module.exports = function cdn(contentDir, options){
         '-thumbnail', '320x350',
         '-interlace', 'Plane',
         '-quality', '80%'
+      ],
+      '/admin/item/white': [
+        '-strip',
+        '-flatten',
+        '-interlace', 'Plane',
+        '-quality', '80%'
       ]
 
     }
@@ -267,7 +273,35 @@ module.exports = function cdn(contentDir, options){
     }
     yield* next;
   }
+  this.downloader = function *downloader(next){
+    // download image
+    if(this.method === 'GET'){
+      var mode = path.dirname(this.path)
+        , type = path.extname(this.path)
+        , id = path.basename(this.path, type)
 
+      if(mode === '/dl') {
+        image = yield fs.readFile(path.join(contentDir, id));
+        this.set('Cache-Control', 'public, max-age=' + (maxAge / 1000 | 0));
+        this.set('Content-Disposition', 'attachment');
+        this.type = 'image/png';
+        this.body = image;
+        return;
+
+      }
+
+      // try { yield fs.access(path.join(contentDir, id)) }
+      // catch (err) { throw err }
+
+      // image = yield fs.readFile(path.join(cache, mode, id+type));
+      //
+      // this.set('Cache-Control', 'public, max-age=' + (maxAge / 1000 | 0));
+      // this.type = 'image/x-icon';
+      // this.body = image;
+      // return;
+    }
+    yield* next;
+  }
   this.imageGenerator = function *imageGenerator(next){
     // generate image
     if(this.method === 'GET'){
@@ -292,10 +326,10 @@ module.exports = function cdn(contentDir, options){
       console.log('Info: Image '+id+' generated.');
 
 
-      image = yield fs.readFile(path.join(cache, mode, id+type));
+      var image = yield fs.readFile(path.join(cache, mode, id+type));
 
       this.set('Cache-Control', 'public, max-age=' + (maxAge / 1000 | 0));
-      this.type = 'image/x-icon';
+      this.type = 'image/'+type;
       this.body = image;
       return;
     }

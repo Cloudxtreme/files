@@ -25,6 +25,9 @@ app.use(cdn.cors)
 app.use(cdn.uploader)
 
 app.use(cdn.fileInfo)
+
+app.use(cdn.downloader)
+
 app.use(cdn.imageGenerator)
 
 app.listen(4205)
