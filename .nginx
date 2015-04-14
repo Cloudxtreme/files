@@ -2,6 +2,7 @@
 server {
   listen 127.0.0.1:4204;
   root /Users/blia/Projects/artauro.ru/files;
+  error_log /Users/blia/Projects/artauro.ru/error_files.log debug;
   try_files /cache$uri @app;
   location @app {
     client_max_body_size 0;

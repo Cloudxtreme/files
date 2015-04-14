@@ -156,6 +156,14 @@ module.exports = function cdn(contentDir, options){
         '-quality', '80%'
       ],
       // admin
+      '/admin/item/search': [
+        '-strip',
+        '-thumbnail', '80x80',
+        '-background', 'transparent',
+        '-gravity', 'center',
+        '-extent', '80x80',
+        '-interlace', 'Plane'
+      ],
       '/admin/item/thumb': [
         '-strip',
         '-flatten',
