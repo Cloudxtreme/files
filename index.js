@@ -192,6 +192,13 @@ module.exports = function cdn(contentDir, options){
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
+      '/admin/item/ico-300': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '300x300',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
       '/admin/item/prev': [
         '-strip',
         '-flatten',
@@ -274,6 +281,8 @@ module.exports = function cdn(contentDir, options){
           file.width = info[2].split('x')[0]
           file.height = info[2].split('x')[1]
           delete file.fileName
+        } else {
+          file.format = path.extname(file.fileName).toUpperCase
         }
       }
       this.body = this.uploaded;
