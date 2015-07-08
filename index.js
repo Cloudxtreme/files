@@ -124,15 +124,55 @@ module.exports = function cdn(contentDir, options){
         '-extent', '180x200',
         '-interlace', 'Plane'
       ],
-      '/ipad/item/preview-2x': [
+      '/iphone/menu/thumb': [
         '-strip',
-        '-thumbnail', '360x400',
+        '-thumbnail', '196x194',
         '-background', 'transparent',
         '-gravity', 'center',
-        '-extent', '360x400',
-        '-interlace', 'Plane'
+        '-extent', '196x194'
+      ],
+      '/iphone/item/cover': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '300x300',
+        '-gravity', 'center',
+        '-extent', '300x300',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/iphone/item/order': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '160x160',
+        '-gravity', 'center',
+        '-extent', '160x160',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/iphone/item/preview': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '640x640',
+        '-gravity', 'center',
+        '-extent', '640x640',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/iphone/item/white': [
+        '-strip',
+        '-flatten',
+        '-interlace', 'Plane',
+        '-quality', '80%'
       ],
       // admin
+      '/admin/item/search': [
+        '-strip',
+        '-thumbnail', '80x80',
+        '-background', 'transparent',
+        '-gravity', 'center',
+        '-extent', '80x80',
+        '-interlace', 'Plane'
+      ],
       '/admin/product/thumb': [
         '-strip',
         '-flatten',
@@ -161,6 +201,13 @@ module.exports = function cdn(contentDir, options){
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
+      '/admin/item/ico-300': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '300x300',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
       '/admin/product/preview': [
         '-strip',
         '-flatten',
@@ -172,6 +219,12 @@ module.exports = function cdn(contentDir, options){
         '-strip',
         '-flatten',
         '-thumbnail', '320x350',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/admin/item/white': [
+        '-strip',
+        '-flatten',
         '-interlace', 'Plane',
         '-quality', '80%'
       ]
@@ -237,6 +290,8 @@ module.exports = function cdn(contentDir, options){
           file.width = info[2].split('x')[0]
           file.height = info[2].split('x')[1]
           delete file.fileName
+        } else {
+          file.format = path.extname(file.fileName).toUpperCase
         }
       }
       this.body = this.uploaded;
@@ -244,7 +299,35 @@ module.exports = function cdn(contentDir, options){
     }
     yield* next;
   }
+  this.downloader = function *downloader(next){
+    // download image
+    if(this.method === 'GET'){
+      var mode = path.dirname(this.path)
+        , type = path.extname(this.path)
+        , id = path.basename(this.path, type)
 
+      if(mode === '/dl') {
+        image = yield fs.readFile(path.join(contentDir, id));
+        this.set('Cache-Control', 'public, max-age=' + (maxAge / 1000 | 0));
+        this.set('Content-Disposition', 'attachment');
+        this.type = 'image/png';
+        this.body = image;
+        return;
+
+      }
+
+      // try { yield fs.access(path.join(contentDir, id)) }
+      // catch (err) { throw err }
+
+      // image = yield fs.readFile(path.join(cache, mode, id+type));
+      //
+      // this.set('Cache-Control', 'public, max-age=' + (maxAge / 1000 | 0));
+      // this.type = 'image/x-icon';
+      // this.body = image;
+      // return;
+    }
+    yield* next;
+  }
   this.imageGenerator = function *imageGenerator(next){
     // generate image
     if(this.method === 'GET'){
@@ -269,10 +352,10 @@ module.exports = function cdn(contentDir, options){
       console.log('Info: Image '+id+' generated.');
 
 
-      image = yield fs.readFile(path.join(cache, mode, id+type));
+      var image = yield fs.readFile(path.join(cache, mode, id+type));
 
       this.set('Cache-Control', 'public, max-age=' + (maxAge / 1000 | 0));
-      this.type = 'image/x-icon';
+      this.type = 'image/'+type;
       this.body = image;
       return;
     }
