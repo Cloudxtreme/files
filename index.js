@@ -140,6 +140,15 @@ module.exports = function cdn(contentDir, options){
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
+      '/iphone/item/order': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '160x160',
+        '-gravity', 'center',
+        '-extent', '160x160',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
       '/iphone/item/preview': [
         '-strip',
         '-flatten',
@@ -164,14 +173,14 @@ module.exports = function cdn(contentDir, options){
         '-extent', '80x80',
         '-interlace', 'Plane'
       ],
-      '/admin/item/thumb': [
+      '/admin/product/thumb': [
         '-strip',
         '-flatten',
         '-thumbnail', '100x100',
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
-      '/admin/item/thumb-2x': [
+      '/admin/product/thumb-2x': [
         '-strip',
         '-flatten',
         '-thumbnail', '200x200',
@@ -199,14 +208,14 @@ module.exports = function cdn(contentDir, options){
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
-      '/admin/item/prev': [
+      '/admin/product/preview': [
         '-strip',
         '-flatten',
         '-thumbnail', '160x175',
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
-      '/admin/item/prev-2x': [
+      '/admin/product/preview-2x': [
         '-strip',
         '-flatten',
         '-thumbnail', '320x350',
