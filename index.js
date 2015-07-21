@@ -201,6 +201,20 @@ module.exports = function cdn(contentDir, options){
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
+      '/admin/product/fm': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '140x140',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/admin/product/fm-2x': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '280x280',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
       '/admin/item/ico-300': [
         '-strip',
         '-flatten',
