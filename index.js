@@ -241,6 +241,27 @@ module.exports = function cdn(contentDir, options){
         '-flatten',
         '-interlace', 'Plane',
         '-quality', '80%'
+      ],
+      '/admin/product/original': [
+        '-strip',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/admin/product/gallery': [
+        '-strip',
+        '-thumbnail', '100x100',
+        '-background', 'transparent',
+        '-gravity', 'center',
+        '-extent', '100x100',
+        '-interlace', 'Plane'
+      ],
+      '/admin/product/gallery2x': [
+        '-strip',
+        '-thumbnail', '200x200',
+        '-background', 'transparent',
+        '-gravity', 'center',
+        '-extent', '200x200',
+        '-interlace', 'Plane'
       ]
 
     }
