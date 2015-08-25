@@ -165,6 +165,21 @@ module.exports = function cdn(contentDir, options){
         '-quality', '80%'
       ],
       // admin
+      // old
+      '/admin/item/thumb': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '100x100',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/admin/item/thumb-2x': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '200x200',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
       '/admin/item/search': [
         '-strip',
         '-thumbnail', '80x80',
@@ -173,6 +188,34 @@ module.exports = function cdn(contentDir, options){
         '-extent', '80x80',
         '-interlace', 'Plane'
       ],
+      '/admin/item/ico-300': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '300x300',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/admin/item/prev': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '160x175',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/admin/item/prev-2x': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '320x350',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/admin/item/white': [
+        '-strip',
+        '-flatten',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      //new
       '/admin/product/thumb': [
         '-strip',
         '-flatten',
@@ -215,13 +258,6 @@ module.exports = function cdn(contentDir, options){
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
-      '/admin/item/ico-300': [
-        '-strip',
-        '-flatten',
-        '-thumbnail', '300x300',
-        '-interlace', 'Plane',
-        '-quality', '80%'
-      ],
       '/admin/product/preview': [
         '-strip',
         '-flatten',
@@ -233,12 +269,6 @@ module.exports = function cdn(contentDir, options){
         '-strip',
         '-flatten',
         '-thumbnail', '320x350',
-        '-interlace', 'Plane',
-        '-quality', '80%'
-      ],
-      '/admin/item/white': [
-        '-strip',
-        '-flatten',
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
