@@ -29,6 +29,13 @@ module.exports = function cdn(contentDir, options){
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
+      '/shop/product/preview/x2': [
+        '-strip',
+        '-background', 'transparent',
+        '-thumbnail', '488x',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
       '/site/item/first-image': [
         '-strip',
         '-thumbnail', '383x558',
