@@ -22,7 +22,22 @@ module.exports = function cdn(contentDir, options){
   var icon
     , cache = path.resolve('./cache')
     , modes = {
+      '/shop/product/preview': [
+        '-strip',
+        '-background', 'transparent',
+        '-thumbnail', '244x',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
       '/site/item/first-image': [
+        '-strip',
+        '-thumbnail', '383x558',
+        '-background', 'transparent',
+        '-gravity', 'center',
+        '-extent', '558x558',
+        '-interlace', 'Plane'
+      ],
+      '/site/orig': [
         '-strip',
         '-thumbnail', '383x558',
         '-background', 'transparent',
