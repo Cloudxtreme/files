@@ -27,6 +27,7 @@ module.exports = function cdn(contentDir, options){
         '-background', 'transparent',
         '-thumbnail', '244x',
         '-interlace', 'Plane',
+        '-unsharp', '1.5x1+0.7+0.02',
         '-quality', '80%'
       ],
       '/shop/product/preview/x2': [
@@ -34,6 +35,7 @@ module.exports = function cdn(contentDir, options){
         '-background', 'transparent',
         '-thumbnail', '488x',
         '-interlace', 'Plane',
+        '-unsharp', '1.5x1+0.7+0.02',
         '-quality', '80%'
       ],
       '/site/item/first-image': [
@@ -339,7 +341,7 @@ module.exports = function cdn(contentDir, options){
       var part;
       var uploaded = [];
       var file;
-
+      this.set('Access-Control-Allow-Origin', '*');
       while (part = yield parts) {
         var storedName = uuid.v4()
         var stream = fs.createWriteStream(path.join(contentDir, storedName));
