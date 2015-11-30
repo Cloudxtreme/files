@@ -254,6 +254,24 @@ module.exports = function cdn(contentDir, options){
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
+      '/admin/product/tiled': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '220x220',
+        '-gravity', 'center',
+        '-extent', '220x220',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
+      '/admin/product/tiled-2x': [
+        '-strip',
+        '-flatten',
+        '-thumbnail', '440x440',
+        '-gravity', 'center',
+        '-extent', '440x440',
+        '-interlace', 'Plane',
+        '-quality', '80%'
+      ],
       '/admin/product/search': [
         '-strip',
         '-flatten',
