@@ -243,14 +243,14 @@ module.exports = function cdn(contentDir, options){
       '/admin/product/thumb': [
         '-strip',
         '-flatten',
-        '-thumbnail', '100x100',
+        '-thumbnail', '200x200',
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
       '/admin/product/thumb-2x': [
         '-strip',
         '-flatten',
-        '-thumbnail', '200x200',
+        '-thumbnail', '400x400',
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
