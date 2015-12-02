@@ -25,7 +25,7 @@ module.exports = function cdn(contentDir, options){
       '/shop/product/preview': [
         '-strip',
         '-background', 'transparent',
-        '-thumbnail', '244x',
+        '-thumbnail', '164x',
         '-interlace', 'Plane',
         '-unsharp', '1.5x1+0.7+0.02',
         '-quality', '80%'
@@ -33,7 +33,7 @@ module.exports = function cdn(contentDir, options){
       '/shop/product/preview/x2': [
         '-strip',
         '-background', 'transparent',
-        '-thumbnail', '488x',
+        '-thumbnail', '328x',
         '-interlace', 'Plane',
         '-unsharp', '1.5x1+0.7+0.02',
         '-quality', '80%'
@@ -268,7 +268,7 @@ module.exports = function cdn(contentDir, options){
         '-flatten',
         '-thumbnail', '440x440',
         '-gravity', 'center',
-        '-extent', '440x440',
+        '-extent', '440x440u',
         '-interlace', 'Plane',
         '-quality', '80%'
       ],
