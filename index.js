@@ -25,15 +25,17 @@ module.exports = function cdn(contentDir, options){
       '/shop/product/preview': [
         '-strip',
         '-background', 'transparent',
-        '-thumbnail', '244x',
+        '-thumbnail', '242x242',
         '-interlace', 'Plane',
+        '-gravity', 'center',
+        '-extent', '242x242',
         '-unsharp', '1.5x1+0.7+0.02',
         '-quality', '80%'
       ],
       '/shop/product/preview/x2': [
         '-strip',
         '-background', 'transparent',
-        '-thumbnail', '488x',
+        '-thumbnail', '484x484',
         '-interlace', 'Plane',
         '-unsharp', '1.5x1+0.7+0.02',
         '-quality', '80%'
