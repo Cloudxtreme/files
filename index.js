@@ -25,7 +25,7 @@ module.exports = function cdn(contentDir, options){
       '/shop/product/preview': [
         '-strip',
         '-background', 'transparent',
-        '-thumbnail', '242x242',
+        '-thumbnail', '242x242\>',
         '-interlace', 'Plane',
         '-gravity', 'center',
         '-extent', '242x242',
@@ -35,7 +35,7 @@ module.exports = function cdn(contentDir, options){
       '/shop/product/preview/x2': [
         '-strip',
         '-background', 'transparent',
-        '-thumbnail', '484x484',
+        '-thumbnail', '484x484\>',
         '-interlace', 'Plane',
         '-unsharp', '1.5x1+0.7+0.02',
         '-quality', '80%'
@@ -66,7 +66,7 @@ module.exports = function cdn(contentDir, options){
       ],
       '/site/item/image': [
         '-strip',
-        '-thumbnail', '558x558',
+        '-thumbnail', '558x558\>',
         '-background', 'transparent',
         '-gravity', 'center',
         '-extent', '558x558',
@@ -74,7 +74,7 @@ module.exports = function cdn(contentDir, options){
       ],
       '/site/item/image-2x': [
         '-strip',
-        '-thumbnail', '1116x1116',
+        '-thumbnail', '1116x1116\>',
         '-background', 'transparent',
         '-gravity', 'center',
         '-extent', '1116x1116',
